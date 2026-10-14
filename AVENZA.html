@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVENZA | Freshers Gala 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel & Plus Jakarta Sans for Haute Couture & Academic Luxury -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 Pro-style icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            light: '#fff2b3',
+                            100: '#fcedb4',
+                            300: '#edd585',
+                            500: '#d4af37', // Pure Classic Metallic Gold
+                            600: '#b89025',
+                            700: '#8c6b12',
+                            900: '#4a3805',
+                        },
+                        obsidian: {
+                            base: '#050507',
+                            card: '#0c0a07',
+                            surface: '#14110b',
+                            border: 'rgba(212, 175, 55, 0.22)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Luxury Styles */
+        html, body {
+            background-color: #050507;
+            color: #f5f2eb;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Gold Foil Metallic Gradients */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff3c4 0%, #edd37e 25%, #d4af37 50%, #aa820a 75%, #ffd768 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-gradient-border {
+            border-image: linear-gradient(to bottom right, #fcedb4, #d4af37, #5c4306) 1;
+        }
+
+        /* 3D Liquid Glassmorphism */
+        .liquid-glass {
+            background: linear-gradient(135deg, rgba(22, 18, 12, 0.72) 0%, rgba(9, 8, 6, 0.88) 100%);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
+                        inset 0 1px 1px rgba(255, 237, 180, 0.2),
+                        inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .liquid-glass:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 30px 60px -10px rgba(212, 175, 55, 0.15),
+                        0 20px 40px -15px rgba(0, 0, 0, 0.9),
+                        inset 0 1px 2px rgba(255, 237, 180, 0.4);
+        }
+
+        /* Interactive Light Glare on 3D Tilt Cards */
+        .glare-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle 280px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 235, 170, 0.12), transparent 75%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 5;
+        }
+
+        .liquid-glass:hover .glare-overlay {
+            opacity: 1;
+        }
+
+        /* Golden Orbit Avatar Frames */
+        .gold-ring-wrapper {
+            position: relative;
+            padding: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #ffe082 0%, #d4af37 40%, #573e04 80%, #ffe082 100%);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Scroll Animations: Blur-Fade */
+        .reveal-blur {
+            opacity: 0;
+            filter: blur(14px);
+            transform: translateY(35px) scale(0.97);
+            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, filter, transform;
+        }
+
+        .reveal-blur.is-visible {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0) scale(1);
+        }
+
+        /* Delay utilities for graceful stagger */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050507;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33270b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="selection:bg-gold-500/30 selection:text-gold-100 min-h-screen relative flex flex-col justify-between">
+
+    <!-- 3D Liquid Gold Ribbons & Stardust Canvas Background -->
+    <canvas id="luxury-bg" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Deep Ambient Radial Glows -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-amber-600/10 via-gold-500/5 to-transparent blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-10 w-[500px] h-[400px] bg-gradient-to-t from-gold-600/5 to-transparent blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Floating Ambient Sound Toggle (Discreet Luxury Control) -->
+    <div class="fixed top-5 right-5 z-50">
+        <button id="sound-toggle" onclick="toggleLuxuryAudio()" class="px-3.5 py-2 rounded-full border border-gold-500/30 bg-obsidian-surface/80 backdrop-blur-xl hover:bg-gold-500/15 text-gold-300 transition-all text-xs flex items-center gap-2 shadow-xl group">
+            <i id="sound-icon" class="fa-solid fa-volume-xmark text-slate-400 group-hover:text-gold-300 transition-colors"></i>
+            <span id="sound-text" class="hidden sm:inline font-medium tracking-wide">Ambient Chimes</span>
+        </button>
+    </div>
+
+    <!-- MAIN INTERFACE -->
+    <div class="relative z-10 flex flex-col flex-grow">
+
+        <!-- ======================================================== -->
+        <!-- HERO SECTION                                             -->
+        <!-- ======================================================== -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-16 w-full flex-grow flex flex-col justify-center">
+
+            <div class="text-center max-w-4xl mx-auto reveal-blur mb-12">
+                
+                <!-- Institutional Header Above Title -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-500/30 bg-obsidian-surface/60 backdrop-blur-md mb-6 shadow-xl">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse"></span>
+                    <span class="font-serif text-[10px] sm:text-xs tracking-[0.2em] uppercase text-gold-300 font-semibold">
+                        Mahatma Gandhi Institute of Technology • Department of Computer Science & Engineering (CSE-5)
+                    </span>
+                </div>
+
+                <p class="font-serif text-xs sm:text-sm tracking-[0.3em] uppercase text-slate-400 mb-6 font-light">
+                    Cordially Welcomes You To
+                </p>
+
+                <!-- AVENZA TITLE: 'avenza.png' -->
+                <div class="relative w-full max-w-2xl mx-auto flex items-center justify-center min-h-[140px] sm:min-h-[180px] my-2">
+                    
+                    <img 
+                        src="avenza.png" 
+                        alt="AVENZA" 
+                        class="max-h-36 sm:max-h-48 md:max-h-56 w-auto object-contain drop-shadow-[0_15px_35px_rgba(212,175,55,0.45)] transition-transform duration-700 hover:scale-[1.02]"
+                        onerror="this.style.display='none'; document.getElementById('avenza-fallback').classList.remove('hidden');"
+                    >
+
+                    <!-- Elegant Haute-Couture Fallback if avenza.png is not in the directory yet -->
+                    <div id="avenza-fallback" class="hidden flex flex-col items-center justify-center">
+                        <h1 class="font-serif font-black text-6xl sm:text-8xl md:text-9xl tracking-[0.18em] uppercase gold-gradient-text drop-shadow-[0_10px_35px_rgba(212,175,55,0.4)] select-none">
+                            AVENZA
+                        </h1>
+                        <div class="flex items-center gap-4 mt-2">
+                            <span class="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold-500"></span>
+                            <span class="font-serif text-xs sm:text-sm tracking-[0.4em] uppercase text-gold-300">FRESHERS GALA</span>
+                            <span class="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold-500"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Subtitle -->
+                <p class="font-sans text-sm sm:text-base text-slate-300 font-light max-w-2xl mx-auto leading-relaxed mt-6">
+                    An exquisite chapter of tradition, harmony, and celebration. Where the legacy of engineering meets the gold standard of camaraderie.
+                </p>
+
+                <!-- DEDICATED DATE & VENUE BADGE -->
+                <div class="inline-flex flex-wrap items-center justify-center gap-5 sm:gap-8 px-6 py-3.5 rounded-2xl liquid-glass border border-gold-500/35 mx-auto mt-7 shadow-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i class="fa-regular fa-calendar-days text-sm"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Date</span>
+                            <span class="font-serif text-xs sm:text-sm font-bold text-gold-200 tracking-wide">15th October, 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="h-7 w-[1px] bg-gold-500/30 hidden sm:block"></div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-location-dot text-sm"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Venue</span>
+                            <span class="font-serif text-xs sm:text-sm font-bold text-gold-200 tracking-wide">E-701</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtle Decorative Accent Divider -->
+                <div class="flex items-center justify-center gap-3 my-7 opacity-60">
+                    <span class="h-[1px] w-16 bg-gradient-to-r from-transparent to-gold-500"></span>
+                    <i class="fa-solid fa-gem text-gold-500 text-xs"></i>
+                    <span class="h-[1px] w-16 bg-gradient-to-l from-transparent to-gold-500"></span>
+                </div>
+            </div>
+
+            <!-- ======================================================== -->
+            <!-- THE FOUR KEY COLUMNS                                     -->
+            <!-- 1. Event Invitation & Venue/Date Details                 -->
+            <!-- 2. Faculty: Principal Prof. G. ChandraMohan Reddy         -->
+            <!-- 3. Faculty: Honourable HOD Prof. T. V. Rajini Kanth      -->
+            <!-- 4. Faculty: Beloved Coordinator Marri Sandhya Rani       -->
+            <!-- ======================================================== -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-stretch">
+
+                <!-- ---------------------------------------------------- -->
+                <!-- COLUMN 1: EVENT INVITATION & VENUE DETAILS           -->
+                <!-- ---------------------------------------------------- -->
+                <div class="liquid-glass rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden tilt-card reveal-blur delay-100 group">
+                    <div class="glare-overlay"></div>
+
+                    <!-- Inner Top: Formal Invitation -->
+                    <div class="relative z-10">
+                        <!-- Card Label -->
+                        <div class="flex items-center justify-between pb-4 border-b border-gold-500/20 mb-5">
+                            <span class="font-serif text-[11px] uppercase tracking-[0.2em] text-gold-300 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-envelope-open-text text-gold-500"></i> Invitation
+                            </span>
+                            <span class="text-[10px] font-mono tracking-wider px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/20 font-semibold">
+                                15 OCT 2026
+                            </span>
+                        </div>
+
+                        <!-- Formal Quote Card -->
+                        <div class="rounded-2xl p-5 bg-gradient-to-br from-obsidian-surface/90 to-obsidian-card/80 border border-gold-500/20 shadow-inner mb-6 relative">
+                            <i class="fa-solid fa-quote-left text-2xl text-gold-500/20 absolute top-3 right-3"></i>
+                            <h4 class="font-serif font-bold text-base text-gold-100 mb-2 tracking-wide">
+                                Formal Invitation
+                            </h4>
+                            <p class="text-xs text-slate-300 font-light leading-relaxed italic">
+                                "Cordially inviting all freshmen to an evening of elegance, rhythm, and welcome memories."
+                            </p>
+                            
+                            <!-- Updated Venue & Date Rows -->
+                            <div class="mt-4 pt-3 border-t border-gold-500/15 flex flex-col gap-2 text-xs text-gold-300/90 font-medium">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-regular fa-calendar-days text-gold-500"></i>
+                                    <span>Date: 15th October, 2026</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-gold-500"></i>
+                                    <span>Venue: E-701</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instagram Spotlight Card -->
+                        <div class="rounded-2xl p-4 bg-obsidian-surface/60 border border-gold-500/20 hover:border-gold-500/40 transition-colors">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-600 via-gold-500 to-yellow-200 p-[1.5px] flex-shrink-0 shadow-md shadow-gold-500/20">
+                                    <div class="w-full h-full bg-obsidian-base rounded-[10px] flex items-center justify-center text-gold-300 text-lg">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <span class="text-[10px] uppercase tracking-widest text-slate-400 block font-semibold">Official Handle</span>
+                                    <h5 class="font-serif font-bold text-sm text-gold-100 tracking-wider truncate">@avenza.cse5</h5>
+                                    <span class="text-[11px] text-slate-400">Exclusive teasers & updates</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Actions -->
+                    <div class="relative z-10 mt-6 pt-4 border-t border-gold-500/20 flex flex-col gap-2">
+                        <a href="https://instagram.com" target="_blank" class="w-full py-2.5 px-4 rounded-xl font-serif text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-gold-600 via-gold-500 to-yellow-500 text-obsidian-base hover:brightness-110 flex items-center justify-center gap-2 shadow-lg shadow-gold-500/20 transition-all">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                            <span>Follow On Instagram</span>
+                        </a>
+                        <button onclick="copyInstagramHandle('avenza.cse5')" class="w-full py-2 px-3 rounded-xl text-xs text-slate-400 hover:text-gold-200 bg-obsidian-surface/70 hover:bg-gold-500/10 border border-gold-500/15 transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-regular fa-clone text-gold-400"></i>
+                            <span>Copy Handle: @avenza.cse5</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ---------------------------------------------------- -->
+                <!-- COLUMN 2: PRINCIPAL                                  -->
+                <!-- ---------------------------------------------------- -->
+                <div class="liquid-glass rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden tilt-card reveal-blur delay-200 group">
+                    <div class="glare-overlay"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between pb-4 border-b border-gold-500/20 mb-6">
+                            <span class="font-serif text-[11px] uppercase tracking-[0.2em] text-gold-300 font-semibold">
+                                Faculty Leadership
+                            </span>
+                            <span class="text-[10px] font-serif text-slate-400 tracking-widest">MGIT</span>
+                        </div>
+
+                        <!-- Portrait Container with Circular Gold Foil Frame -->
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-36 h-36 sm:w-40 sm:h-40 gold-ring-wrapper mb-5 shadow-2xl relative">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-obsidian-surface border-2 border-obsidian-base relative">
+                                    <img 
+                                        src="principal.png" 
+                                        alt="Prof. G. ChandraMohan Reddy - Principal MGIT" 
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        onerror="this.style.display='none'; document.getElementById('principal-avatar-fallback').classList.remove('hidden');"
+                                    >
+                                    <div id="principal-avatar-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-obsidian-surface to-obsidian-card flex flex-col items-center justify-center p-2">
+                                        <i class="fa-solid fa-user-tie text-4xl text-gold-400/80 mb-2"></i>
+                                        <span class="text-[10px] text-gold-300/80 font-mono">principal.png</span>
+                                    </div>
+                                </div>
+                                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-obsidian-base border border-gold-500/50 shadow-md">
+                                    <span class="text-[9px] font-serif uppercase tracking-widest font-bold text-gold-300">Principal</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-lg sm:text-xl text-gold-100 tracking-wide mt-2">
+                                Prof. G. ChandraMohan Reddy
+                            </h3>
+                            <p class="text-xs uppercase tracking-widest text-gold-400 font-medium mt-1">
+                                Principal, MGIT
+                            </p>
+                            <p class="text-xs text-slate-300 font-light leading-relaxed mt-4 px-2">
+                                Steering academic distinction, innovation, and conferring institutional blessings upon the incoming CSE engineers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-6 pt-4 border-t border-gold-500/20 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-serif text-[11px] text-gold-300/80">Chief Patron</span>
+                        <span class="text-[11px] tracking-wide text-slate-400"><i class="fa-solid fa-shield-halved text-gold-500 mr-1"></i> MGIT Gandipet</span>
+                    </div>
+                </div>
+
+                <!-- ---------------------------------------------------- -->
+                <!-- COLUMN 3: HONOURABLE HOD                             -->
+                <!-- ---------------------------------------------------- -->
+                <div class="liquid-glass rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden tilt-card reveal-blur delay-300 group">
+                    <div class="glare-overlay"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between pb-4 border-b border-gold-500/20 mb-6">
+                            <span class="font-serif text-[11px] uppercase tracking-[0.2em] text-gold-300 font-semibold">
+                                Department Head
+                            </span>
+                            <span class="text-[10px] font-serif text-slate-400 tracking-widest">DEPT. CSE</span>
+                        </div>
+
+                        <!-- Portrait Container with Circular Gold Foil Frame -->
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-36 h-36 sm:w-40 sm:h-40 gold-ring-wrapper mb-5 shadow-2xl relative">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-obsidian-surface border-2 border-obsidian-base relative">
+                                    <img 
+                                        src="hod.png" 
+                                        alt="Prof. T. V. Rajini Kanth - HOD CSE" 
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        onerror="this.style.display='none'; document.getElementById('hod-avatar-fallback').classList.remove('hidden');"
+                                    >
+                                    <div id="hod-avatar-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-obsidian-surface to-obsidian-card flex flex-col items-center justify-center p-2">
+                                        <i class="fa-solid fa-chalkboard-user text-4xl text-gold-400/80 mb-2"></i>
+                                        <span class="text-[10px] text-gold-300/80 font-mono">hod.png</span>
+                                    </div>
+                                </div>
+                                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-obsidian-base border border-gold-500/50 shadow-md">
+                                    <span class="text-[9px] font-serif uppercase tracking-widest font-bold text-gold-300">Honourable HOD</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-lg sm:text-xl text-gold-100 tracking-wide mt-2">
+                                Prof. T. V. Rajini Kanth
+                            </h3>
+                            <p class="text-xs uppercase tracking-widest text-gold-400 font-medium mt-1">
+                                Head of the Department
+                            </p>
+                            <p class="text-[11px] text-gold-200/90 font-medium mt-0.5">
+                                Department of Computer Science & Engineering
+                            </p>
+                            <p class="text-xs text-slate-300 font-light leading-relaxed mt-3 px-2">
+                                Inspiring research breakthroughs, foundational rigor, and welcoming CSE-5 freshmen with pride and purpose.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-6 pt-4 border-t border-gold-500/20 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-serif text-[11px] text-gold-300/80">Department Patron</span>
+                        <span class="text-[11px] tracking-wide text-slate-400"><i class="fa-solid fa-code text-gold-500 mr-1"></i> Dept. of CSE</span>
+                    </div>
+                </div>
+
+                <!-- ---------------------------------------------------- -->
+                <!-- COLUMN 4: BELOVED FACULTY COORDINATOR               -->
+                <!-- ---------------------------------------------------- -->
+                <div class="liquid-glass rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden tilt-card reveal-blur delay-400 group">
+                    <div class="glare-overlay"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between pb-4 border-b border-gold-500/20 mb-6">
+                            <span class="font-serif text-[11px] uppercase tracking-[0.2em] text-gold-300 font-semibold">
+                                Faculty Coordinator
+                            </span>
+                            <span class="text-[10px] font-serif text-slate-400 tracking-widest">MENTOR</span>
+                        </div>
+
+                        <!-- Portrait Container with Circular Gold Foil Frame -->
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-36 h-36 sm:w-40 sm:h-40 gold-ring-wrapper mb-5 shadow-2xl relative">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-obsidian-surface border-2 border-obsidian-base relative">
+                                    <img 
+                                        src="se.png" 
+                                        alt="Marri Sandhya Rani - Faculty Coordinator" 
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        onerror="this.style.display='none'; document.getElementById('coordinator-avatar-fallback').classList.remove('hidden');"
+                                    >
+                                    <div id="coordinator-avatar-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-obsidian-surface to-obsidian-card flex flex-col items-center justify-center p-2">
+                                        <i class="fa-solid fa-user-graduate text-4xl text-gold-400/80 mb-2"></i>
+                                        <span class="text-[10px] text-gold-300/80 font-mono">se.png</span>
+                                    </div>
+                                </div>
+                                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-obsidian-base border border-gold-500/50 shadow-md">
+                                    <span class="text-[9px] font-serif uppercase tracking-widest font-bold text-gold-300">Coordinator</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-lg sm:text-xl text-gold-100 tracking-wide mt-2">
+                                Marri Sandhya Rani
+                            </h3>
+                            <p class="text-xs uppercase tracking-widest text-gold-400 font-medium mt-1">
+                                Beloved Faculty Coordinator
+                            </p>
+                            <p class="text-[11px] text-gold-200/90 font-medium mt-0.5">
+                                Department of Computer Science & Engineering
+                            </p>
+                            <p class="text-xs text-slate-300 font-light leading-relaxed mt-3 px-2">
+                                Guiding the heart and spirit of AVENZA, nurturing senior mentorship, and extending a gracious welcome to the new cohort.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-6 pt-4 border-t border-gold-500/20 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-serif text-[11px] text-gold-300/80">Chief Advisor</span>
+                        <span class="text-[11px] tracking-wide text-slate-400"><i class="fa-solid fa-heart text-gold-500 mr-1"></i> CSE-5 Mentor</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- LUXURY FOOTER -->
+        <footer class="w-full border-t border-gold-500/15 bg-obsidian-base/90 backdrop-blur-xl py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <div class="flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-full gold-ring-wrapper flex items-center justify-center">
+                        <div class="w-full h-full bg-obsidian-base rounded-full flex items-center justify-center">
+                            <span class="font-serif font-bold text-gold-300 text-xs">A</span>
+                        </div>
+                    </div>
+                    <span class="font-serif tracking-widest text-xs text-gold-200 uppercase font-bold">AVENZA • CSE-5</span>
+                </div>
+                <p class="text-[11px] text-slate-400 font-light">
+                    15th October, 2026 • Venue: E-701 • Mahatma Gandhi Institute of Technology (MGIT)
+                </p>
+                <div class="text-[11px] text-gold-400/70 font-serif">
+                    © 2026 Department of CSE - 5
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="gold-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none liquid-glass border border-gold-500/40 rounded-2xl p-4 shadow-2xl flex items-center gap-3.5 max-w-sm">
+        <div id="toast-icon-wrap" class="w-9 h-9 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+            <i class="fa-solid fa-check text-sm"></i>
+        </div>
+        <div>
+            <p id="toast-title" class="text-xs font-serif font-bold text-gold-100 tracking-wide">Success</p>
+            <p id="toast-desc" class="text-[11px] text-slate-300 mt-0.5">Notification description</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: 3D CANVAS, TILT, WEBAUDIO, OBSERVER -->
+    <script>
+        // 1. ABSTRACT MOVING BACKGROUND: 3D LIQUID GOLD WAVES & PARTICLES
+        const canvas = document.getElementById('luxury-bg');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        let mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initStardust();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX;
+            mouse.targetY = e.clientY;
+        });
+
+        let particles = [];
+        function initStardust() {
+            particles = [];
+            const count = Math.min(Math.floor(width / 20), 65);
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.6 + 0.4,
+                    alpha: Math.random() * 0.7 + 0.15,
+                    speedY: Math.random() * 0.35 + 0.1,
+                    driftX: (Math.random() - 0.5) * 0.3,
+                    pulse: Math.random() * Math.PI,
+                });
+            }
+        }
+        initStardust();
+
+        let waveTime = 0;
+
+        function drawAbstractBackground() {
+            ctx.clearRect(0, 0, width, height);
+
+            mouse.x += (mouse.targetX - mouse.x) * 0.05;
+            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+            waveTime += 0.007;
+
+            const ribbonConfigs = [
+                { amp: 65, freq: 0.0016, yOffset: height * 0.35, colorStop1: 'rgba(212, 175, 55, 0.08)', colorStop2: 'rgba(74, 56, 5, 0)' },
+                { amp: 85, freq: 0.0012, yOffset: height * 0.52, colorStop1: 'rgba(255, 230, 133, 0.06)', colorStop2: 'rgba(30, 24, 7, 0)' },
+                { amp: 55, freq: 0.0020, yOffset: height * 0.68, colorStop1: 'rgba(184, 144, 37, 0.05)', colorStop2: 'rgba(10, 8, 4, 0)' }
+            ];
+
+            ribbonConfigs.forEach((cfg, idx) => {
+                ctx.beginPath();
+                ctx.moveTo(0, height);
+                for (let x = 0; x <= width; x += 18) {
+                    const mouseInfluence = ((mouse.x / width) - 0.5) * 40 * (idx + 1);
+                    const y = cfg.yOffset +
+                              Math.sin(x * cfg.freq + waveTime + idx) * cfg.amp +
+                              Math.cos(x * 0.0008 - waveTime) * (cfg.amp * 0.5) +
+                              mouseInfluence;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(width, height);
+                ctx.closePath();
+
+                const grad = ctx.createLinearGradient(0, cfg.yOffset - cfg.amp, 0, height);
+                grad.addColorStop(0, cfg.colorStop1);
+                grad.addColorStop(0.7, cfg.colorStop2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+            });
+
+            particles.forEach(p => {
+                p.y -= p.speedY;
+                p.x += p.driftX;
+                p.pulse += 0.03;
+
+                if (p.y < 0) p.y = height + 10;
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+
+                const currentAlpha = Math.max(0.05, p.alpha + Math.sin(p.pulse) * 0.25);
+                ctx.fillStyle = `rgba(237, 213, 133, ${currentAlpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(drawAbstractBackground);
+        }
+
+        // 2. 3D CURSOR TILT WITH INTERACTIVE GLARE TRACKING
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -6.5;
+                const rotateY = ((x - centerX) / centerX) * 6.5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // 3. SMOOTH SCROLL BLUR-FADE REVEAL
+        const revealElements = document.querySelectorAll('.reveal-blur');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. CELESTIAL AMBIENT SOUND (Web Audio API Synthesizer)
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let masterGain = null;
+        let chimeInterval = null;
+
+        function toggleLuxuryAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const soundIcon = document.getElementById('sound-icon');
+            const soundToggle = document.getElementById('sound-toggle');
+
+            if (!isAudioPlaying) {
+                masterGain = audioCtx.createGain();
+                masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                masterGain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
+                masterGain.connect(audioCtx.destination);
+
+                startHarmonicChimes();
+                isAudioPlaying = true;
+                if (soundIcon) soundIcon.className = "fa-solid fa-volume-high text-gold-300";
+                if (soundToggle) soundToggle.classList.add('border-gold-400', 'bg-gold-500/20');
+                showToast("Ambient Audio Active", "Celestial harmonic chimes playing in background.");
+            } else {
+                if (masterGain) {
+                    masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+                    setTimeout(() => {
+                        if (chimeInterval) clearInterval(chimeInterval);
+                    }, 1000);
+                }
+                isAudioPlaying = false;
+                if (soundIcon) soundIcon.className = "fa-solid fa-volume-xmark text-slate-400";
+                if (soundToggle) soundToggle.classList.remove('border-gold-400', 'bg-gold-500/20');
+                showToast("Audio Muted", "Ambient synth generator silenced.");
+            }
+        }
+
+        function playChime(freq, timeOffset = 0) {
+            if (!audioCtx || !isAudioPlaying) return;
+            const now = audioCtx.currentTime + timeOffset;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now);
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.linearRampToValueAtTime(0.06, now + 0.15);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.2);
+
+            osc.connect(gain);
+            gain.connect(masterGain);
+
+            osc.start(now);
+            osc.stop(now + 3.4);
+        }
+
+        function startHarmonicChimes() {
+            const pentatonicFrequencies = [293.66, 329.63, 369.99, 440.00, 554.37, 659.25];
+            function sequence() {
+                if (!isAudioPlaying) return;
+                const pick = pentatonicFrequencies[Math.floor(Math.random() * pentatonicFrequencies.length)];
+                playChime(pick);
+                if (Math.random() > 0.4) {
+                    playChime(pick * 1.5, 0.4);
+                }
+            }
+            sequence();
+            chimeInterval = setInterval(sequence, 3800);
+        }
+
+        // 5. COPY TO CLIPBOARD HELPER
+        function copyInstagramHandle(handleText) {
+            const temp = document.createElement("input");
+            document.body.appendChild(temp);
+            temp.value = handleText;
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+            showToast("Handle Copied!", `@${handleText} copied to clipboard.`);
+        }
+
+        // 6. TOAST NOTIFICATION SYSTEM
+        let toastTimeout = null;
+        function showToast(title, message) {
+            const toast = document.getElementById('gold-toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3600);
+        }
+
+        window.onload = function() {
+            drawAbstractBackground();
+        };
+    </script>
+</body>
+</html>
